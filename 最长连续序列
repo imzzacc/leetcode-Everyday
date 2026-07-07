@@ -1,0 +1,25 @@
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        Set<Integer> numsSet=new HashSet<>();
+        for(int i:nums){
+            numsSet.add(i);
+        }
+        int ans=0;
+        for(int x:numsSet){
+            if(numsSet.contains(x-1)){
+                continue;//这个数不是起点
+            }
+            //是起点
+            int y=x+1;
+            while(numsSet.contains(y)){//注意这里的while 不是if
+                y++;
+            }
+            ans=Math.max(ans,y-x);//从x->y-1共有y—x个数
+            //优化 假如现在找到的这条长度乘二大于整个nums数组 直接返回结果 因为不会有更长的了
+            if(ans*2>=nums.length){
+                break;
+            }
+        }
+        return ans;
+    }
+}
