@@ -1,0 +1,27 @@
+//原地栈
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int stackSize=0;
+        for(int x:nums){
+            if(x!=0){
+            nums[stackSize++]=x;
+            }
+        }
+        Arrays.fill(nums,stackSize,nums.length,0);
+    }
+}
+//双指针
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int lastPos=0;
+        for(int x=0;x<nums.length;x++){
+            //增强for循环不能安全的交换数组，因为里面的x只是一个局部变量 交换元素的时候涉及到交换x并不能改变在这个数组中的值
+            if(nums[x]!=0){
+                int temp=nums[x];
+                nums[x]=nums[lastPos];
+                nums[lastPos]=temp;
+                lastPos++;
+            }
+        }
+    }
+}
