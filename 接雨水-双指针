@@ -1,0 +1,25 @@
+class Solution {
+    public int trap(int[] height) {
+        int n=height.length;
+        if(n<3){
+            return 0;//这种情况装不下水
+        }       
+        int left=1;
+        int right=n-2;
+        int leftMax=height[0];
+        int rightMax=height[n-1];
+        int water=0;
+        while(left<=right){
+            if(leftMax<=rightMax){
+                leftMax=Math.max(leftMax,height[left]);
+                water+=Math.max(0,leftMax-height[left]);
+                left++;
+            }else{
+                rightMax=Math.max(rightMax,height[right]);
+                water+=Math.max(0,rightMax-height[right]);
+                right--;
+            }
+        }
+        return water;
+    }
+}
