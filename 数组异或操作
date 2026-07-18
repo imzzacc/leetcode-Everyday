@@ -1,0 +1,15 @@
+class Solution {
+    public int xorOperation(int n, int start) {
+        int a=start/2;
+        int b=start & n & 1;
+        return (xorN(a+n-1)^xorN(a-1))*2+b;
+    }
+    private int xorN(int n){
+        return switch(n%4){
+            case 0->n;
+            case 1->1;
+            case 2->n+1;
+            default->0;
+        };
+    }
+}
