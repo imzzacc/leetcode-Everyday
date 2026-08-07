@@ -1,0 +1,28 @@
+//前序遍历 根左右 求的是深度
+class Solution {
+     private int ans;
+    public int maxDepth(TreeNode root) {
+        dfs(root,0);
+        return ans;
+    }
+    private void dfs(TreeNode node,int depth){
+        if(node==null){
+            return;
+        }
+        depth++;
+        ans=Math.max(depth,ans);
+        dfs(node.left,depth);
+        dfs(node.right,depth);
+    }
+}
+//后序遍历 左右根 求的是高度 但是根节点的高度就等于这棵树的深度
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if(root==null){
+            return 0;
+        }
+        int lDepth=maxDepth(root.left);
+        int rDepth=maxDepth(root.right);
+        return Math.max(lDepth,rDepth)+1;
+    }
+}
