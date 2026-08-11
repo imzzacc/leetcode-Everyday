@@ -25,3 +25,21 @@ class Solution {
         return left<x&&x<right&&isValidBST(node.left,left,x)&&isValidBST(node.right,x,right);
     }
 }
+
+//中序：中序遍历二叉搜索树得到的结果是严格单调递增的 并且每个节点也要保证左子树一定都小于这个节点的值 右子树一定都大于这个节点的值
+class Solution {
+    private long pre=Long.MIN_VALUE;
+    public boolean isValidBST(TreeNode root) {
+        if(root==null){
+            return true;
+        }
+        if(!isValidBST(root.left)){//左
+            return false;
+        }
+        if(root.val<=pre){//中
+            return false;
+        }
+        pre=root.val;
+        return isValidBST(root.right);//右
+    }
+}
