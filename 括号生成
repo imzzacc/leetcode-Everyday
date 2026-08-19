@@ -1,0 +1,24 @@
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> res=new ArrayList<>();
+        StringBuilder path=new StringBuilder();
+        dfs(n,0,0,path,res);
+        return res;
+    }
+    private void dfs(int n,int leftSum,int rightSum,StringBuilder path,List<String> res){
+        if(leftSum==n&&rightSum==n){
+            res.add(path.toString());
+            return;
+        }
+        if(leftSum<n){
+            path.append("(");
+            dfs(n,leftSum+1,rightSum,path,res);
+            path.deleteCharAt(path.length()-1);
+        }
+        if(leftSum>rightSum){
+            path.append(")");
+            dfs(n,leftSum,rightSum+1,path,res);
+            path.deleteCharAt(path.length()-1);
+        }
+    }
+}
