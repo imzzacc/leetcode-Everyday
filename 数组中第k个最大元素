@@ -1,0 +1,32 @@
+class Solution {
+    private Random random=new Random();
+    public int findKthLargest(int[] nums, int k) {
+        int pivot=nums[random.nextInt(nums.length)];
+        List<Integer> left=new ArrayList<>();
+        List<Integer> mid=new ArrayList<>();
+        List<Integer> right=new ArrayList<>();
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]<pivot){
+                right.add(nums[i]);
+            }else if(nums[i]==pivot){
+                mid.add(nums[i]);
+            }else{
+                left.add(nums[i]);
+            }
+        }
+        if(k<=left.size()){
+            return findKthLargest(toArray(left),k);
+        }else if(k<=left.size()+mid.size()){
+            return pivot;
+        }else{
+            return findKthLargest(toArray(right),k-left.size()-mid.size());
+        }
+    }
+    private int[] toArray(List<Integer> list){
+        int[] nums=new int[list.size()];
+        for(int i=0;i<list.size();i++){
+            nums[i]=list.get(i);
+        }
+        return nums;
+    }
+}
