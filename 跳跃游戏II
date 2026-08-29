@@ -1,0 +1,22 @@
+class Solution {
+    public int jump(int[] nums) {
+        if(nums.length==1){
+            return 0;
+        }
+        int cur=0;
+        int next=0;
+        int result=0;
+        for(int i=0;i<nums.length;i++){
+            next=Math.max(next,nums[i]+i);
+            if(i==cur){
+                if(i!=nums.length-1){
+                    result++;
+                    cur=next;
+                }else{
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+}
